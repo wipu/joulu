@@ -40,14 +40,7 @@ public abstract class Typed<T> {
 			return false;
 		}
 		Typed<?> other = (Typed<?>) obj;
-		if (value == null) {
-			if (other.value != null) {
-				return false;
-			}
-		} else if (!value.equals(other.value)) {
-			return false;
-		}
-		return true;
+		return value.equals(other.value);
 	}
 
 }
