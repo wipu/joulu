@@ -29,7 +29,12 @@ public class JouluWorkspace implements IwantWorkspace {
 			.name("joulu-strongly-typed").locationUnderWsRoot("strongly-typed")
 			.mavenLayout().noMainResources().noTestResources().mainDeps()
 			.testDeps(hamcrestCore, junit).end();
-
+    
+	private final JavaSrcModule optional = JavaSrcModule.with()
+			.name("joulu-optional").locationUnderWsRoot("optional")
+			.mavenLayout().noMainResources().noTestResources().mainDeps(stronglyTyped)
+			.testDeps(hamcrestCore, junit).end();
+	
 	@Override
 	public List<? extends Target> targets() {
 		return Arrays.asList(new HelloTarget("hello", "hello from iwant"));
@@ -44,7 +49,7 @@ public class JouluWorkspace implements IwantWorkspace {
 	}
 
 	private Set<JavaSrcModule> allSrcModules() {
-		return new TreeSet<JavaSrcModule>(Arrays.asList(stronglyTyped));
+		return new TreeSet<JavaSrcModule>(Arrays.asList(stronglyTyped, optional));
 	}
 
 }
