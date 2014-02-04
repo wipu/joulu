@@ -36,6 +36,28 @@ public class ImmutableSetTest {
 	}
 
 	@Test
+	public void containsWithOverriddenEquivalence() {
+		Equivalence<String> eq = new Equivalence<String>() {
+			@Override
+			public boolean areEquivalent(String value1, String value2) {
+				return value1.equals(value2);
+			}
+		};
+		Set<String> set = ImmutableSet.of(eq, "Foo", "Bar");
+		Equivalence<String> laxEq = new Equivalence<String>() {
+
+			@Override
+			public boolean areEquivalent(String value1, String value2) {
+				return value1.equalsIgnoreCase(value2);
+			}
+
+		};
+		assertFalse(set.contains("foo"));
+		assertTrue(set.contains(laxEq, "foo"));
+
+	}
+
+	@Test
 	public void sizeOfNonEmpty() {
 		Equivalence<String> eq = null;
 

@@ -19,6 +19,11 @@ public class ImmutableSet<T> implements Set<T> {
 			return false;
 		}
 
+		@Override
+		public boolean contains(Equivalence<T> eq, T value) {
+			return false;
+		}
+
 	}
 
 	public ImmutableSet(Equivalence<T> eq, T[] values) {
@@ -41,6 +46,11 @@ public class ImmutableSet<T> implements Set<T> {
 
 	@Override
 	public boolean contains(T value) {
+		return contains(eq, value);
+	}
+	
+	@Override
+	public boolean contains(Equivalence<T> eq, T value) {
 		for (T candidate : values) {
 			if (eq.areEquivalent(candidate, value)) {
 				return true;
@@ -48,5 +58,4 @@ public class ImmutableSet<T> implements Set<T> {
 		}
 		return false;
 	}
-
 }
