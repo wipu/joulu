@@ -4,7 +4,7 @@ final class Absent<T> extends Optional<T> {
 
 	@Override
 	public T get() {
-		throw new IllegalStateException("Absent object has no value");
+		throw new NullPointerException("Absent object has no value");
 	}
 
 	@Override

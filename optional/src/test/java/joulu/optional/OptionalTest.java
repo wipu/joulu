@@ -1,16 +1,32 @@
 package joulu.optional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 public class OptionalTest {
 
 	@Test
-	public void createAndGetOptional() {
+	public void createAndGetPresentOptional() {
 		Optional<String> optional = Optional.of("foo");
 		Assert.assertTrue(optional.isPresent());
 		Assert.assertFalse(optional.isAbsent());
 		Assert.assertEquals("foo", optional.get());
+	}
+
+	@Test
+	public void createAndGetAbsentOptional() {
+		Optional<String> optional = Optional.absent();
+		Assert.assertFalse(optional.isPresent());
+		Assert.assertTrue(optional.isAbsent());
+		try {
+			optional.get();
+			fail();
+		} catch (NullPointerException e) {
+			assertEquals("Absent object has no value", e.getMessage());
+		}
 	}
 
 	@Test
