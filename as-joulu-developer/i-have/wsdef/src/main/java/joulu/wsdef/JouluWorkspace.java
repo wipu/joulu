@@ -6,16 +6,27 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import net.sf.iwant.api.EclipseSettings;
+import net.sf.iwant.api.EmmaTargetsOfJavaModules;
 import net.sf.iwant.api.FromRepository;
 import net.sf.iwant.api.IwantWorkspace;
 import net.sf.iwant.api.SideEffectDefinitionContext;
+import net.sf.iwant.api.TestedIwantDependencies;
 import net.sf.iwant.api.javamodules.JavaBinModule;
 import net.sf.iwant.api.javamodules.JavaSrcModule;
-import net.sf.iwant.api.model.HelloTarget;
+import net.sf.iwant.api.javamodules.JavaSrcModule.IwantSrcModuleSpex;
 import net.sf.iwant.api.model.SideEffect;
+import net.sf.iwant.api.model.StringFilter;
 import net.sf.iwant.api.model.Target;
 
 public class JouluWorkspace implements IwantWorkspace {
+
+	private static StringFilter testNameFilter = new StringFilter() {
+		@Override
+		public boolean matches(String candidate) {
+			return candidate.matches(".*Test$")
+					&& !candidate.matches(".*Abstract[^.]*Test$");
+		}
+	};
 
 	private final JavaBinModule hamcrestCore = JavaBinModule.providing(
 			FromRepository.repo1MavenOrg().group("org/hamcrest")
@@ -25,19 +36,23 @@ public class JouluWorkspace implements IwantWorkspace {
 					FromRepository.repo1MavenOrg().group("junit").name("junit")
 							.version("4.11")).runtimeDeps(hamcrestCore).end();
 
-	private final JavaSrcModule stronglyTyped = JavaSrcModule.with()
-			.name("joulu-strongly-typed").locationUnderWsRoot("strongly-typed")
-			.mavenLayout().noMainResources().noTestResources().mainDeps()
+	private final JavaSrcModule stronglyTyped = srcModule("strongly-typed")
+			.noMainResources().noTestResources().mainDeps()
 			.testDeps(hamcrestCore, junit).end();
 
-	private final JavaSrcModule optional = JavaSrcModule.with()
-			.name("joulu-optional").locationUnderWsRoot("optional")
-			.mavenLayout().noMainResources().noTestResources()
-			.mainDeps(stronglyTyped).testDeps(hamcrestCore, junit).end();
+	private final JavaSrcModule optional = srcModule("optional")
+			.noMainResources().noTestResources().mainDeps(stronglyTyped)
+			.testDeps(hamcrestCore, junit).end();
+
+	private static IwantSrcModuleSpex srcModule(String name) {
+		return JavaSrcModule.with().name("joulu-" + name)
+				.locationUnderWsRoot(name).mavenLayout()
+				.testedBy(testNameFilter);
+	}
 
 	@Override
 	public List<? extends Target> targets() {
-		return Arrays.asList(new HelloTarget("hello", "hello from iwant"));
+		return Arrays.asList(emmaReport());
 	}
 
 	@Override
@@ -51,6 +66,16 @@ public class JouluWorkspace implements IwantWorkspace {
 	private Set<JavaSrcModule> allSrcModules() {
 		return new TreeSet<JavaSrcModule>(
 				Arrays.asList(optional, stronglyTyped));
+	}
+
+	private Target emmaReport() {
+		EmmaTargetsOfJavaModules emmaTargets = EmmaTargetsOfJavaModules
+				.with()
+				.antJars(TestedIwantDependencies.antJar(),
+						TestedIwantDependencies.antLauncherJar())
+				.emma(TestedIwantDependencies.emma()).modules(allSrcModules())
+				.end();
+		return emmaTargets.emmaReport();
 	}
 
 }
