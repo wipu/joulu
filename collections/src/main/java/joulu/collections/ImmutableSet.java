@@ -48,7 +48,7 @@ public class ImmutableSet<T> implements Set<T> {
 	public boolean contains(T value) {
 		return contains(eq, value);
 	}
-	
+
 	@Override
 	public boolean contains(Equivalence<T> eq, T value) {
 		for (T candidate : values) {
