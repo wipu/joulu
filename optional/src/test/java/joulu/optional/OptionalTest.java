@@ -14,7 +14,7 @@ public class OptionalTest {
 		Optional<String> optional = Optional.of("foo");
 		Assert.assertTrue(optional.isPresent());
 		Assert.assertFalse(optional.isAbsent());
-		Assert.assertEquals("foo", optional.get());
+		Assert.assertEquals("foo", optional.value());
 	}
 
 	@Test
@@ -23,7 +23,7 @@ public class OptionalTest {
 		Assert.assertFalse(optional.isPresent());
 		Assert.assertTrue(optional.isAbsent());
 		try {
-			optional.get();
+			optional.value();
 			fail();
 		} catch (NullPointerException e) {
 			assertEquals("Absent object has no value", e.getMessage());

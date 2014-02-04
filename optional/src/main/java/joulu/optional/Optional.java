@@ -22,7 +22,7 @@ public final class Optional<T> {
 		return (Optional<T>) ABSENT;
 	}
 
-	public T get() {
+	public T value() {
 		if (isAbsent()) {
 			throw new NullPointerException("Absent object has no value");
 		} else {
