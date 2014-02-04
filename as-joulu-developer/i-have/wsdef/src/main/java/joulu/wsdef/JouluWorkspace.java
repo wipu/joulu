@@ -44,6 +44,13 @@ public class JouluWorkspace implements IwantWorkspace {
 			.noMainResources().noTestResources().mainDeps(stronglyTyped)
 			.testDeps(hamcrestCore, junit).end();
 
+	private final JavaSrcModule equivalence = srcModule("equivalence")
+			.noMainResources().noTestJava().noTestResources().end();
+
+	private final JavaSrcModule collections = srcModule("collections")
+			.noMainResources().noTestResources().mainDeps(equivalence)
+			.testDeps(hamcrestCore, junit).end();
+
 	private static IwantSrcModuleSpex srcModule(String name) {
 		return JavaSrcModule.with().name("joulu-" + name)
 				.locationUnderWsRoot(name).mavenLayout()
@@ -64,8 +71,8 @@ public class JouluWorkspace implements IwantWorkspace {
 	}
 
 	private Set<JavaSrcModule> allSrcModules() {
-		return new TreeSet<JavaSrcModule>(
-				Arrays.asList(optional, stronglyTyped));
+		return new TreeSet<JavaSrcModule>(Arrays.asList(collections,
+				equivalence, optional, stronglyTyped));
 	}
 
 	private Target emmaReport() {
