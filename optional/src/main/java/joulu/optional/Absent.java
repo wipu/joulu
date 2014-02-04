@@ -16,12 +16,12 @@ final class Absent<T> extends Optional<T> {
 	public boolean isAbsent() {
 		return true;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return 0;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return getClass().equals(obj.getClass());

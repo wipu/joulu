@@ -10,13 +10,13 @@ public class TypedFloatTest {
 			super(value);
 		}
 	}
-	
+
 	@Test
 	public void equalsAndHashcodeUsesValue() {
 		TypedFloat a1 = new MyFloat(1.0f);
 		TypedFloat a2 = new MyFloat(1.0f);
 		TypedFloat b = new MyFloat(2.0f);
-		
+
 		Assert.assertTrue(a1.equals(a2));
 		Assert.assertFalse(a2.equals(b));
 	}
