@@ -1,6 +1,7 @@
 package joulu.optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.fail;
 
 import org.junit.Assert;
@@ -30,13 +31,13 @@ public class OptionalTest {
 	}
 
 	@Test
-	public void createNullOptional() {
-		try {
-			Optional.of(null);
-			Assert.fail();
-		} catch (NullPointerException npe) {
-			Assert.assertEquals("Value must not be null", npe.getMessage());
-		}
+	public void nullOptionalIsAllowedAndIsAlwaysTheSameInstance() {
+		Optional<String> absent1 = Optional.of(null);
+		Optional<Integer> absent2 = Optional.of(null);
+		Optional<Float> absent3 = Optional.absent();
+
+		assertSame(absent1, absent2);
+		assertSame(absent1, absent3);
 	}
 
 	@Test
@@ -47,13 +48,15 @@ public class OptionalTest {
 	}
 
 	@Test
-	public void presentOptionalEquality() {
+	public void presentOptionalEqualsAndHashcode() {
 		Optional<Integer> a1 = Optional.of(100);
 		Optional<Integer> a2 = Optional.of(100);
 		Optional<Integer> b = Optional.of(50);
 
 		Assert.assertEquals(a1, a2);
 		Assert.assertFalse(b.equals(a2));
+
+		assertEquals(a1.hashCode(), a2.hashCode());
 	}
 
 	@Test
@@ -64,5 +67,7 @@ public class OptionalTest {
 
 		Assert.assertEquals(a1, a2);
 		Assert.assertEquals(b, a2);
+
+		assertEquals(a1.hashCode(), a2.hashCode());
 	}
 }
