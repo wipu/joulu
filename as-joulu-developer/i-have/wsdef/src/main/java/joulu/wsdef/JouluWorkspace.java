@@ -50,7 +50,7 @@ public class JouluWorkspace implements IwantWorkspace {
 
 	private Set<JavaSrcModule> allSrcModules() {
 		return new TreeSet<JavaSrcModule>(
-				Arrays.asList(stronglyTyped, optional));
+				Arrays.asList(optional, stronglyTyped));
 	}
 
 }
