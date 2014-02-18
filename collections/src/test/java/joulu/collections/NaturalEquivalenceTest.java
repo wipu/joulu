@@ -1,8 +1,9 @@
 package joulu.collections;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import joulu.equivalence.Equivalence;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class NaturalEquivalenceTest {
