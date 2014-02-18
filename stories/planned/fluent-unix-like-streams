@@ -1,0 +1,7 @@
+Easy unix-like streams
+
+- fluent i.e. more like nio than io: stream producer calls the consumer, not vice versa
+- lowest level: byte array
+- a unixish next level: "lines of bytes" so ignore encoding, just split by \n
+- another next level: strings using given encoding
+- alternative lines: from string stream, not byte stream
