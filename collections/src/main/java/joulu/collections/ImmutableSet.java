@@ -2,6 +2,7 @@ package joulu.collections;
 
 import joulu.equivalence.Equivalence;
 import joulu.equivalence.Filter;
+import joulu.optional.Optional;
 
 public class ImmutableSet<T> implements Set<T> {
 
@@ -28,6 +29,11 @@ public class ImmutableSet<T> implements Set<T> {
 		@Override
 		public boolean contains(Filter<T> filter) {
 			return false;
+		}
+
+		@Override
+		public Optional<T> findOne(Filter<T> filter) {
+			return Optional.absent();
 		}
 
 	}
@@ -77,5 +83,15 @@ public class ImmutableSet<T> implements Set<T> {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public Optional<T> findOne(Filter<T> filter) {
+		for (T candidate : values) {
+			if (filter.matches(candidate)) {
+				return Optional.of(candidate);
+			}
+		}
+		return Optional.absent();
 	}
 }

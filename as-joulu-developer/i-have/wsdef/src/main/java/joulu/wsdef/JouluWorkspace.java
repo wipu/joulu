@@ -53,7 +53,7 @@ public class JouluWorkspace implements IwantWorkspace {
 			.noMainResources().noTestJava().noTestResources().end();
 
 	private final JavaSrcModule collections = srcModule("collections")
-			.noMainResources().noTestResources().mainDeps(equivalence)
+			.noMainResources().noTestResources().mainDeps(equivalence, optional)
 			.testDeps(hamcrestCore, junit).end();
 
 	private static IwantSrcModuleSpex srcModule(String name) {
