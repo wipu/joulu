@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import joulu.equivalence.Equivalence;
+import joulu.equivalence.Filter;
 
 import org.junit.Test;
 
@@ -16,6 +17,14 @@ public class ImmutableSetTest {
 		assertEquals(0, empty.size());
 
 		assertFalse(empty.contains("1"));
+		
+		Filter<String> filter = new Filter<String>() {
+			@Override
+			public boolean matches(String t) {
+				return true;
+			}
+		};
+		assertFalse(empty.contains(filter));
 	}
 
 	@Test
@@ -63,6 +72,31 @@ public class ImmutableSetTest {
 
 		assertEquals(2, ImmutableSet.of(eq, "1", "2").size());
 		assertEquals(3, ImmutableSet.of(eq, "1", "2", "3").size());
+	}
+	
+	@Test
+	public void containsWithFilter() {
+		Equivalence<String> eq = new Equivalence<String>() {
+
+			@Override
+			public boolean areEquivalent(String value1, String value2) {
+				return value1.equals(value2);
+			}
+			
+		};
+		
+		Set<String> set = ImmutableSet.of(eq, "1", "2");
+		final String value = "2";
+		
+		Filter<String> filter = new Filter<String>() {
+
+			@Override
+			public boolean matches(String other) {
+				return value.equals(other);
+			}
+		};
+		
+		assertTrue(set.contains(filter));		
 	}
 
 }

@@ -1,6 +1,7 @@
 package joulu.collections;
 
 import joulu.equivalence.Equivalence;
+import joulu.equivalence.Filter;
 
 public interface Collection<T> {
 
