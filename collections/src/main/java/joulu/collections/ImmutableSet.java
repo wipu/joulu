@@ -1,6 +1,7 @@
 package joulu.collections;
 
 import joulu.equivalence.Equivalence;
+import joulu.equivalence.Filter;
 
 public class ImmutableSet<T> implements Set<T> {
 
@@ -21,6 +22,11 @@ public class ImmutableSet<T> implements Set<T> {
 
 		@Override
 		public boolean contains(Equivalence<T> eq, T value) {
+			return false;
+		}
+		
+		@Override
+		public boolean contains(Filter<T> filter) {
 			return false;
 		}
 
@@ -53,6 +59,16 @@ public class ImmutableSet<T> implements Set<T> {
 	public boolean contains(Equivalence<T> eq, T value) {
 		for (T candidate : values) {
 			if (eq.areEquivalent(candidate, value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean contains(Filter<T> filter) {
+		for (T candidate : values) {
+			if (filter.matches(candidate)) {
 				return true;
 			}
 		}
