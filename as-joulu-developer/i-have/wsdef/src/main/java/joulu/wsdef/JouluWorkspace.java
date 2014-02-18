@@ -53,8 +53,9 @@ public class JouluWorkspace implements IwantWorkspace {
 			.noMainResources().noTestJava().noTestResources().end();
 
 	private final JavaSrcModule collections = srcModule("collections")
-			.noMainResources().noTestResources().mainDeps(equivalence, optional)
-			.testDeps(hamcrestCore, junit).end();
+			.noMainResources().noTestResources()
+			.mainDeps(equivalence, optional).testDeps(hamcrestCore, junit)
+			.end();
 
 	private final JavaSrcModule byteConsumer = srcModule("byte-consumer")
 			.noMainResources().noTestJava().noTestResources().end();
