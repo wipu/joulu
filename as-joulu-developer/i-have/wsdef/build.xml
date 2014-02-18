@@ -13,12 +13,16 @@
 		<call-iwant wish="list-of/targets" />
 	</target>
 
-	<target name="side-effect/eclipse-settings/effective">
+	<target name="list-of/side-effects">
+		<call-iwant wish="list-of/side-effects" />
+	</target>
+
+	<target name="s eclipse-settings">
 		<call-iwant wish="side-effect/eclipse-settings/effective" />
 		<echo message="Remember to refresh the projects" />
 	</target>
 
-	<target name="target/emma-coverage/as-path">
+	<target name="t emma-coverage">
 		<call-iwant wish="target/emma-coverage/as-path" />
 	</target>
 
