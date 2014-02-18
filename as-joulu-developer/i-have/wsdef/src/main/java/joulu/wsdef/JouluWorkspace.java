@@ -26,6 +26,11 @@ public class JouluWorkspace implements IwantWorkspace {
 			return candidate.matches(".*Test$")
 					&& !candidate.matches(".*Abstract[^.]*Test$");
 		}
+
+		@Override
+		public String toString() {
+			return "JouluTestNameFilter";
+		}
 	};
 
 	private final JavaBinModule hamcrestCore = JavaBinModule.providing(
