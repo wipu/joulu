@@ -1,0 +1,3 @@
+Collections can be queried with criterias
+-interface with matches method
+-collections have method findOne and findFirst etc. which take criteria as arg
