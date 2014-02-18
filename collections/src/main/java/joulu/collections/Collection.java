@@ -9,4 +9,6 @@ public interface Collection<T> {
 	boolean contains(T value);
 
 	boolean contains(Equivalence<T> eq, T value);
+	
+	boolean contains(Filter<T> filter);
 }
