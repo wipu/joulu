@@ -99,4 +99,9 @@ public class ImmutableSetTest {
 		assertTrue(set.contains(filter));
 	}
 
+	@Test
+	public void setWithNaturalEquivalence() {
+		Set<Integer> set = ImmutableSet.of(1, 2);
+		assertTrue(set.contains(2));
+	}
 }
