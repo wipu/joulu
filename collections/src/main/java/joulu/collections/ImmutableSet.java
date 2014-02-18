@@ -84,7 +84,7 @@ public class ImmutableSet<T> implements Set<T> {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public Optional<T> findOne(Filter<T> filter) {
 		for (T candidate : values) {

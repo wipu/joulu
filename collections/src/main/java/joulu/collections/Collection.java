@@ -13,6 +13,6 @@ public interface Collection<T> {
 	boolean contains(Equivalence<T> eq, T value);
 
 	boolean contains(Filter<T> filter);
-	
+
 	Optional<T> findOne(Filter<T> filter);
 }

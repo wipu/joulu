@@ -19,7 +19,7 @@ public class ImmutableSetTest {
 
 		assertFalse(empty.contains("1"));
 	}
-	
+
 	@Test
 	public void emptySetWithEquivalence() {
 		Set<String> empty = ImmutableSet.empty();
@@ -29,10 +29,10 @@ public class ImmutableSetTest {
 				return true;
 			}
 		};
-		
+
 		assertFalse(empty.contains(eq, "foo"));
 	}
-	
+
 	@Test
 	public void emptySetWithFilter() {
 		Set<String> empty = ImmutableSet.empty();
@@ -43,7 +43,7 @@ public class ImmutableSetTest {
 			}
 		};
 		assertFalse(empty.contains(filter));
-		
+
 		Optional<String> elem = empty.findOne(filter);
 		assertTrue(elem.isAbsent());
 	}
@@ -110,7 +110,7 @@ public class ImmutableSetTest {
 
 		assertTrue(set.contains(filter));
 	}
-	
+
 	@Test
 	public void withNotMatchingFilter() {
 		Set<String> set = ImmutableSet.of("1", "2");
@@ -132,22 +132,22 @@ public class ImmutableSetTest {
 		assertTrue(set.contains(2));
 		assertFalse(set.contains(0));
 	}
-	
+
 	@Test
 	public void findOne() {
 		Set<Integer> set = ImmutableSet.of(1, 3, 5);
 		final int limit = 2;
-		
+
 		Filter<Integer> greaterThan3 = new Filter<Integer>() {
 
 			@Override
 			public boolean matches(Integer value) {
 				return value > limit;
 			}
-			
+
 		};
 		assertEquals(Integer.valueOf(3), set.findOne(greaterThan3).value());
-		
+
 		final int anotherLimit = 5;
 		Filter<Integer> greaterThan5 = new Filter<Integer>() {
 
@@ -155,9 +155,9 @@ public class ImmutableSetTest {
 			public boolean matches(Integer value) {
 				return value > anotherLimit;
 			}
-			
+
 		};
 		assertEquals(Optional.absent(), set.findOne(greaterThan5));
-		
+
 	}
 }
