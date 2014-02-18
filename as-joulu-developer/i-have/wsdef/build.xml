@@ -1,0 +1,25 @@
+<project name="as-joulu-developer-iwant" default="list-of/targets" basedir="../../..">
+
+	<macrodef name="call-iwant">
+		<attribute name="wish" />
+		<sequential>
+			<ant antfile="as-joulu-developer/with/ant/iw/build.xml" inheritall="false">
+				<property name="wish" value="@{wish}" />
+			</ant>
+		</sequential>
+	</macrodef>
+
+	<target name="list-of/targets">
+		<call-iwant wish="list-of/targets" />
+	</target>
+
+	<target name="side-effect/eclipse-settings/effective">
+		<call-iwant wish="side-effect/eclipse-settings/effective" />
+		<echo message="Remember to refresh the projects" />
+	</target>
+
+	<target name="target/emma-coverage/as-path">
+		<call-iwant wish="target/emma-coverage/as-path" />
+	</target>
+
+</project>
