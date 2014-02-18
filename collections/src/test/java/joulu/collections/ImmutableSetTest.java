@@ -73,7 +73,7 @@ public class ImmutableSetTest {
 		assertEquals(2, ImmutableSet.of(eq, "1", "2").size());
 		assertEquals(3, ImmutableSet.of(eq, "1", "2", "3").size());
 	}
-	
+
 	@Test
 	public void containsWithFilter() {
 		Equivalence<String> eq = new Equivalence<String>() {
