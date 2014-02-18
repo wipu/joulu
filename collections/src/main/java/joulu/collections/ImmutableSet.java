@@ -31,7 +31,7 @@ public class ImmutableSet<T> implements Set<T> {
 		}
 
 	}
-
+	
 	public ImmutableSet(Equivalence<T> eq, T[] values) {
 		this.eq = eq;
 		this.values = values;
@@ -45,6 +45,10 @@ public class ImmutableSet<T> implements Set<T> {
 		return new ImmutableSet<T>(eq, values);
 	}
 
+	public static <T> Set<T> of(T... values) {
+		return new ImmutableSet<T>(new NaturalEquivalence<T>(), values);
+	}
+	
 	@Override
 	public int size() {
 		return values.length;
