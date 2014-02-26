@@ -19,6 +19,15 @@ public class ImmutableSetTest {
 
 		assertFalse(empty.contains("1"));
 	}
+	
+	@Test
+	public void emptySetWithOf() {
+		Set<String> empty = ImmutableSet.of();
+
+		assertEquals(0, empty.size());
+
+		assertFalse(empty.contains("1"));
+	}
 
 	@Test
 	public void emptySetWithEquivalence() {
@@ -89,10 +98,8 @@ public class ImmutableSetTest {
 
 	@Test
 	public void sizeOfNonEmpty() {
-		Equivalence<String> eq = null;
-
-		assertEquals(2, ImmutableSet.of(eq, "1", "2").size());
-		assertEquals(3, ImmutableSet.of(eq, "1", "2", "3").size());
+		assertEquals(2, ImmutableSet.of("1", "2").size());
+		assertEquals(3, ImmutableSet.of("1", "2", "3").size());
 	}
 
 	@Test
@@ -158,6 +165,29 @@ public class ImmutableSetTest {
 
 		};
 		assertEquals(Optional.absent(), set.findOne(greaterThan5));
-
+	}
+	
+	@Test
+	public void repeatedValuesNotAllowed() {
+		Set<Integer> set = ImmutableSet.of(1, 1);
+		assertEquals(1, set.size());
+		assertTrue(set.contains(1));
+		
+		set = ImmutableSet.of(1, 2);
+		assertEquals(2, set.size());
+		assertTrue(set.contains(1));
+		assertTrue(set.contains(2));
+		
+		set = ImmutableSet.of(1, 2, 2, 1, 3);
+		assertEquals(3, set.size());
+		assertTrue(set.contains(1));
+		assertTrue(set.contains(2));
+		assertTrue(set.contains(3));
+		
+		set = ImmutableSet.of(1, 1, 2, 2, 5, 5, 5);
+		assertEquals(3, set.size());
+		assertTrue(set.contains(1));
+		assertTrue(set.contains(2));
+		assertTrue(set.contains(5));
 	}
 }

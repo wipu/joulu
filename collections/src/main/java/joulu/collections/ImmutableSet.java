@@ -1,5 +1,8 @@
 package joulu.collections;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 import joulu.equivalence.Equivalence;
 import joulu.equivalence.Filter;
 import joulu.optional.Optional;
@@ -40,7 +43,30 @@ public class ImmutableSet<T> implements Set<T> {
 
 	public ImmutableSet(Equivalence<T> eq, T[] values) {
 		this.eq = eq;
-		this.values = values;
+		this.values = distinctValues(values);
+	}
+	
+	private T[] distinctValues(T[] values) {
+		if (values.length == 0 || values.length == 1) {
+			return values;
+		}
+		@SuppressWarnings("unchecked")
+		T[] distinct = (T[]) Array.newInstance(values[0].getClass(), values.length);
+		distinct[0] = values[0];
+		int index = 1;
+		for (int i = 1; i < values.length; i++) {
+			for (T dv : distinct) {
+				if (dv == null) {
+					distinct[index] = values[i];
+					index++;
+					break;
+				}
+				if (eq.areEquivalent(values[i], dv)) {
+					break;
+				}
+			}
+		}
+		return Arrays.copyOf(distinct, index);
 	}
 
 	public static <T> Set<T> empty() {
