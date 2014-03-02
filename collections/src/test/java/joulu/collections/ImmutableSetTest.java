@@ -3,6 +3,11 @@ package joulu.collections;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import joulu.equivalence.Equivalence;
 import joulu.equivalence.Filter;
 import joulu.optional.Optional;
@@ -18,6 +23,7 @@ public class ImmutableSetTest {
 		assertEquals(0, empty.size());
 
 		assertFalse(empty.contains("1"));
+		
 	}
 	
 	@Test
@@ -57,6 +63,25 @@ public class ImmutableSetTest {
 		assertTrue(elem.isAbsent());
 	}
 
+	@Test
+	public void emptySetIterator() {
+		Set<String> empty = ImmutableSet.empty();
+		Iterator<String> iterator = empty.iterator();
+		assertFalse(iterator.hasNext());
+		try {
+			iterator.next();
+			fail();
+		} catch (NoSuchElementException e) {
+			// empty
+		}
+		try {
+			iterator.remove();
+			fail();
+		} catch (UnsupportedOperationException e) {
+			// empty
+		}
+	}
+	
 	@Test
 	public void containsWithConstructionTimeEquivalence() {
 		Equivalence<String> eq = new Equivalence<String>() {
@@ -189,5 +214,48 @@ public class ImmutableSetTest {
 		assertTrue(set.contains(1));
 		assertTrue(set.contains(2));
 		assertTrue(set.contains(5));
+	}
+	
+	@Test
+	public void setIsIterable() {
+		Set<Integer> set = ImmutableSet.of();
+		assertFalse(set.iterator().hasNext());
+		
+		set = ImmutableSet.of(1);
+		assertTrue(set.iterator().hasNext());
+		for (Integer i : set) {
+			assertEquals(Integer.valueOf(1), i);
+		}
+		
+		set = ImmutableSet.of(1, 2, 3, 4);
+		int expected = 1;
+		for (Integer i : set) {
+			assertEquals(Integer.valueOf(expected), i);
+			expected++;
+		}
+		assertEquals(5, expected);
+	}
+	
+	@Test
+	public void iteratorRemoveThrowsException() {
+		Iterator<Integer> iterator = ImmutableSet.of(100).iterator();
+		try {
+			iterator.remove();
+			fail();
+		} catch (UnsupportedOperationException e) {
+			// empty
+		}
+	}
+	
+	@Test
+	public void iteratorNextThrowsExceptionWhenSizeExceeded() {
+		Iterator<Integer> iterator = ImmutableSet.of(100).iterator();
+		try {
+			iterator.next();
+			iterator.next();
+			fail();
+		} catch (NoSuchElementException e) {
+			// empty
+		}
 	}
 }

@@ -2,6 +2,8 @@ package joulu.collections;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import joulu.equivalence.Equivalence;
 import joulu.equivalence.Filter;
@@ -37,6 +39,27 @@ public class ImmutableSet<T> implements Set<T> {
 		@Override
 		public Optional<T> findOne(Filter<T> filter) {
 			return Optional.absent();
+		}
+		
+		@Override
+		public Iterator<T> iterator() {
+			return new Iterator<T>() {
+
+				@Override
+				public boolean hasNext() {
+					return false;
+				}
+
+				@Override
+				public T next() {
+					throw new NoSuchElementException();
+				}
+
+				@Override
+				public void remove() {
+					throw new UnsupportedOperationException();
+				}	
+			};
 		}
 
 	}
@@ -119,5 +142,41 @@ public class ImmutableSet<T> implements Set<T> {
 			}
 		}
 		return Optional.absent();
+	}
+	
+	@Override
+	public Iterator<T> iterator() {
+		return new ArrayIterator<T>(values);
+	}
+	
+	private static class ArrayIterator<T> implements Iterator<T> {
+		private T[] values;
+		private int index = 0;
+		
+		private ArrayIterator(T[] values) {
+			this.values = values;
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return values.length > index;
+		}
+
+		@Override
+		public T next() {
+			try {
+				T value = values[index];
+				index++;
+				return value;
+			} catch (ArrayIndexOutOfBoundsException e) {
+				throw new NoSuchElementException();
+			}
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+		
 	}
 }
