@@ -1,10 +1,7 @@
 package joulu.optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 public class OptionalTest {
@@ -12,16 +9,16 @@ public class OptionalTest {
 	@Test
 	public void createAndGetPresentOptional() {
 		Optional<String> optional = Optional.of("foo");
-		Assert.assertTrue(optional.isPresent());
-		Assert.assertFalse(optional.isAbsent());
-		Assert.assertEquals("foo", optional.value());
+		assertTrue(optional.isPresent());
+		assertFalse(optional.isAbsent());
+		assertEquals("foo", optional.value());
 	}
 
 	@Test
 	public void createAndGetAbsentOptional() {
 		Optional<String> optional = Optional.absent();
-		Assert.assertFalse(optional.isPresent());
-		Assert.assertTrue(optional.isAbsent());
+		assertFalse(optional.isPresent());
+		assertTrue(optional.isAbsent());
 		try {
 			optional.value();
 			fail();
@@ -43,8 +40,8 @@ public class OptionalTest {
 	@Test
 	public void createAbsentOptional() {
 		Optional<Integer> absent = Optional.absent();
-		Assert.assertTrue(absent.isAbsent());
-		Assert.assertFalse(absent.isPresent());
+		assertTrue(absent.isAbsent());
+		assertFalse(absent.isPresent());
 	}
 
 	@Test
@@ -52,9 +49,11 @@ public class OptionalTest {
 		Optional<Integer> a1 = Optional.of(100);
 		Optional<Integer> a2 = Optional.of(100);
 		Optional<Integer> b = Optional.of(50);
-
-		Assert.assertEquals(a1, a2);
-		Assert.assertFalse(b.equals(a2));
+		String s = "s";
+		
+		assertEquals(a1, a2);
+		assertFalse(b.equals(a2));
+		assertFalse(b.equals(s));
 
 		assertEquals(a1.hashCode(), a2.hashCode());
 	}
@@ -65,9 +64,18 @@ public class OptionalTest {
 		Optional<Integer> a2 = Optional.absent();
 		Optional<String> b = Optional.absent();
 
-		Assert.assertEquals(a1, a2);
-		Assert.assertEquals(b, a2);
+		assertEquals(a1, a2);
+		assertEquals(b, a2);
 
 		assertEquals(a1.hashCode(), a2.hashCode());
+	}
+	
+	@Test
+	public void absentAndPresentOptionalEquality() {
+		Optional<Integer> absent = Optional.absent();
+		Optional<Integer> present = Optional.of(100);
+		assertFalse(absent.equals(present));
+		assertFalse(present.equals(absent));
+		assertFalse(present.equals(null));
 	}
 }
