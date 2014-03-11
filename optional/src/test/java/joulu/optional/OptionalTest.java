@@ -78,4 +78,16 @@ public class OptionalTest {
 		assertFalse(present.equals(absent));
 		assertFalse(present.equals(null));
 	}
+	
+	@Test
+	public void presentOptionalOr() {
+		Optional<Integer> present = Optional.of(10);
+		assertEquals(Integer.valueOf(10), present.or(5));
+	}
+	
+	@Test
+	public void absentOptionalOr() {
+		Optional<Integer> absent = Optional.absent();
+		assertEquals(Integer.valueOf(5), absent.or(5));
+	}
 }

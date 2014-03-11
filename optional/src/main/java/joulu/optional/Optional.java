@@ -68,4 +68,8 @@ public final class Optional<T> {
 		return true;
 	}
 
+	public T or(T value) {
+		return this.value == null ? value : this.value;
+	}
+
 }
