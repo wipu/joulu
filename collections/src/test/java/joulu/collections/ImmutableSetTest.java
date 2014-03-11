@@ -250,8 +250,8 @@ public class ImmutableSetTest {
 	@Test
 	public void iteratorNextThrowsExceptionWhenSizeExceeded() {
 		Iterator<Integer> iterator = ImmutableSet.of(100).iterator();
+		iterator.next();
 		try {
-			iterator.next();
 			iterator.next();
 			fail();
 		} catch (NoSuchElementException e) {

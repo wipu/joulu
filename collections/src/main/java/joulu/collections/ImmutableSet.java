@@ -75,13 +75,13 @@ public class ImmutableSet<T> implements Set<T> {
 		}
 		@SuppressWarnings("unchecked")
 		T[] distinct = (T[]) Array.newInstance(values[0].getClass(), values.length);
-		distinct[0] = values[0];
-		int index = 1;
-		for (int i = 1; i < values.length; i++) {
+		//distinct[0] = values[0];
+		int distinctCount = 0;
+		for (int i = 0; i < values.length; i++) {
 			for (T dv : distinct) {
 				if (dv == null) {
-					distinct[index] = values[i];
-					index++;
+					distinct[distinctCount] = values[i];
+					distinctCount++;
 					break;
 				}
 				if (eq.areEquivalent(values[i], dv)) {
@@ -89,7 +89,7 @@ public class ImmutableSet<T> implements Set<T> {
 				}
 			}
 		}
-		return Arrays.copyOf(distinct, index);
+		return Arrays.copyOf(distinct, distinctCount);
 	}
 
 	public static <T> Set<T> empty() {
