@@ -9,7 +9,7 @@ import org.junit.Test;
 public class ByteUtilTest {
 
 	/**
-	 * TODO find a way to tell emma to ignore default constuctors
+	 * TODO find a way to tell emma to ignore default constructors
 	 */
 	@Test
 	public void itCanBeInstantiatedAlthoughItIsJustAStaticUtil() {
