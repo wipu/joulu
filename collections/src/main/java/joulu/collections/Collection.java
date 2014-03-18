@@ -4,7 +4,7 @@ import joulu.equivalence.Equivalence;
 import joulu.equivalence.Filter;
 import joulu.optional.Optional;
 
-public interface Collection<T> {
+public interface Collection<T> extends Iterable<T> {
 
 	int size();
 

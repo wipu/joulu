@@ -1,0 +1,2 @@
+-change collection interface to extend Iterable
+-add implementation to ImmutableSet

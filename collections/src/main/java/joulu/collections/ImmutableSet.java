@@ -1,5 +1,10 @@
 package joulu.collections;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import joulu.equivalence.Equivalence;
 import joulu.equivalence.Filter;
 import joulu.optional.Optional;
@@ -35,12 +40,56 @@ public class ImmutableSet<T> implements Set<T> {
 		public Optional<T> findOne(Filter<T> filter) {
 			return Optional.absent();
 		}
+		
+		@Override
+		public Iterator<T> iterator() {
+			return new Iterator<T>() {
+
+				@Override
+				public boolean hasNext() {
+					return false;
+				}
+
+				@Override
+				public T next() {
+					throw new NoSuchElementException();
+				}
+
+				@Override
+				public void remove() {
+					throw new UnsupportedOperationException();
+				}	
+			};
+		}
 
 	}
 
 	public ImmutableSet(Equivalence<T> eq, T[] values) {
 		this.eq = eq;
-		this.values = values;
+		this.values = distinctValues(values);
+	}
+	
+	private T[] distinctValues(T[] values) {
+		if (values.length == 0 || values.length == 1) {
+			return values;
+		}
+		@SuppressWarnings("unchecked")
+		T[] distinct = (T[]) Array.newInstance(values[0].getClass(), values.length);
+		//distinct[0] = values[0];
+		int distinctCount = 0;
+		for (int i = 0; i < values.length; i++) {
+			for (T dv : distinct) {
+				if (dv == null) {
+					distinct[distinctCount] = values[i];
+					distinctCount++;
+					break;
+				}
+				if (eq.areEquivalent(values[i], dv)) {
+					break;
+				}
+			}
+		}
+		return Arrays.copyOf(distinct, distinctCount);
 	}
 
 	public static <T> Set<T> empty() {
@@ -93,5 +142,41 @@ public class ImmutableSet<T> implements Set<T> {
 			}
 		}
 		return Optional.absent();
+	}
+	
+	@Override
+	public Iterator<T> iterator() {
+		return new ArrayIterator<T>(values);
+	}
+	
+	private static class ArrayIterator<T> implements Iterator<T> {
+		private T[] values;
+		private int index = 0;
+		
+		private ArrayIterator(T[] values) {
+			this.values = values;
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return values.length > index;
+		}
+
+		@Override
+		public T next() {
+			try {
+				T value = values[index];
+				index++;
+				return value;
+			} catch (ArrayIndexOutOfBoundsException e) {
+				throw new NoSuchElementException();
+			}
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+		
 	}
 }

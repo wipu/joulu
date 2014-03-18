@@ -50,7 +50,9 @@ public class TypedStringTest {
 		TypedString b = new MyString("b");
 
 		assertTrue(a1.equals(a2));
+		assertTrue(a1.equals(a1));
 		assertFalse(a1.equals(b));
+		assertFalse(a1.equals(null));
 
 		assertEquals(a1.hashCode(), a2.hashCode());
 	}
