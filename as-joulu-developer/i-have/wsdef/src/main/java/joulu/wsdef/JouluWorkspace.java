@@ -67,6 +67,10 @@ public class JouluWorkspace implements IwantWorkspace {
 			.noMainResources().noTestResources().mainDeps(byteProducer)
 			.testDeps(hamcrestCore, junit).end();
 
+	private final JavaSrcModule unsignedByte = srcModule("unsigned-byte")
+			.noMainResources().noTestResources().mainDeps()
+			.testDeps(hamcrestCore, junit).end();
+
 	private static IwantSrcModuleSpex srcModule(String name) {
 		return JavaSrcModule.with().name("joulu-" + name)
 				.locationUnderWsRoot(name).mavenLayout()
@@ -89,7 +93,7 @@ public class JouluWorkspace implements IwantWorkspace {
 	private Set<JavaSrcModule> allSrcModules() {
 		return new TreeSet<JavaSrcModule>(Arrays.asList(byteConsumer,
 				byteProducer, byteProducers, collections, equivalence,
-				optional, stronglyTyped));
+				optional, stronglyTyped, unsignedByte));
 	}
 
 	private Target emmaReport() {
