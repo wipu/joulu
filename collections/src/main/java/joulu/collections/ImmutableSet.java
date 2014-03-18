@@ -40,7 +40,7 @@ public class ImmutableSet<T> implements Set<T> {
 		public Optional<T> findOne(Filter<T> filter) {
 			return Optional.absent();
 		}
-		
+
 		@Override
 		public Iterator<T> iterator() {
 			return new Iterator<T>() {
@@ -58,7 +58,7 @@ public class ImmutableSet<T> implements Set<T> {
 				@Override
 				public void remove() {
 					throw new UnsupportedOperationException();
-				}	
+				}
 			};
 		}
 
@@ -68,14 +68,15 @@ public class ImmutableSet<T> implements Set<T> {
 		this.eq = eq;
 		this.values = distinctValues(values);
 	}
-	
+
 	private T[] distinctValues(T[] values) {
 		if (values.length == 0 || values.length == 1) {
 			return values;
 		}
 		@SuppressWarnings("unchecked")
-		T[] distinct = (T[]) Array.newInstance(values[0].getClass(), values.length);
-		//distinct[0] = values[0];
+		T[] distinct = (T[]) Array.newInstance(values[0].getClass(),
+				values.length);
+		// distinct[0] = values[0];
 		int distinctCount = 0;
 		for (int i = 0; i < values.length; i++) {
 			for (T dv : distinct) {
@@ -143,20 +144,20 @@ public class ImmutableSet<T> implements Set<T> {
 		}
 		return Optional.absent();
 	}
-	
+
 	@Override
 	public Iterator<T> iterator() {
 		return new ArrayIterator<T>(values);
 	}
-	
+
 	private static class ArrayIterator<T> implements Iterator<T> {
 		private T[] values;
 		private int index = 0;
-		
+
 		private ArrayIterator(T[] values) {
 			this.values = values;
 		}
-		
+
 		@Override
 		public boolean hasNext() {
 			return values.length > index;
@@ -177,6 +178,6 @@ public class ImmutableSet<T> implements Set<T> {
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}
-		
+
 	}
 }

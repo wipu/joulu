@@ -1,6 +1,10 @@
 package joulu.optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -50,7 +54,7 @@ public class OptionalTest {
 		Optional<Integer> a2 = Optional.of(100);
 		Optional<Integer> b = Optional.of(50);
 		String s = "s";
-		
+
 		assertEquals(a1, a2);
 		assertFalse(b.equals(a2));
 		assertFalse(b.equals(s));
@@ -69,7 +73,7 @@ public class OptionalTest {
 
 		assertEquals(a1.hashCode(), a2.hashCode());
 	}
-	
+
 	@Test
 	public void absentAndPresentOptionalEquality() {
 		Optional<Integer> absent = Optional.absent();
@@ -78,13 +82,13 @@ public class OptionalTest {
 		assertFalse(present.equals(absent));
 		assertFalse(present.equals(null));
 	}
-	
+
 	@Test
 	public void presentOptionalOr() {
 		Optional<Integer> present = Optional.of(10);
 		assertEquals(Integer.valueOf(10), present.or(5));
 	}
-	
+
 	@Test
 	public void absentOptionalOr() {
 		Optional<Integer> absent = Optional.absent();
