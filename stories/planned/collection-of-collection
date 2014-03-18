@@ -1,0 +1,2 @@
+map of collections: easy way to ensure empty when adding a value to Map<K,Set<V>> etc, of course might (should?!) exist in some other lib
+but maybe even more chaining: add(k1,k2,v) -> "mkdir -p k1/k2 && write v"
