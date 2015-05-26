@@ -106,7 +106,7 @@ public class JouluWorkspace implements IwantWorkspace {
 				.jacocoWithDeps(jacoco(), asmAll.mainArtifact())
 				.antJars(TestedIwantDependencies.antJar(),
 						TestedIwantDependencies.antLauncherJar())
-				.modules(allSrcModules()).end().jacocoReport("jacoco-report");
+				.modules(allSrcModules()).end().jacocoReport("coverage-report");
 
 	}
 
