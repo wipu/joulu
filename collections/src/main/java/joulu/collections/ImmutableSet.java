@@ -94,15 +94,17 @@ public class ImmutableSet<T> implements Set<T> {
 	}
 
 	public static <T> Set<T> empty() {
-		return new Empty<T>();
+		return new Empty<>();
 	}
 
+	@SafeVarargs
 	public static <T> Set<T> of(Equivalence<T> eq, T... values) {
-		return new ImmutableSet<T>(eq, values);
+		return new ImmutableSet<>(eq, values);
 	}
 
+	@SafeVarargs
 	public static <T> Set<T> of(T... values) {
-		return new ImmutableSet<T>(new NaturalEquivalence<T>(), values);
+		return new ImmutableSet<>(new NaturalEquivalence<T>(), values);
 	}
 
 	@Override
@@ -147,7 +149,7 @@ public class ImmutableSet<T> implements Set<T> {
 
 	@Override
 	public Iterator<T> iterator() {
-		return new ArrayIterator<T>(values);
+		return new ArrayIterator<>(values);
 	}
 
 	private static class ArrayIterator<T> implements Iterator<T> {

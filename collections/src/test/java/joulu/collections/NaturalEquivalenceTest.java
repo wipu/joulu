@@ -9,7 +9,7 @@ import org.junit.Test;
 public class NaturalEquivalenceTest {
 	@Test
 	public void createAndTest() {
-		Equivalence<String> e = new NaturalEquivalence<String>();
+		Equivalence<String> e = new NaturalEquivalence<>();
 		assertTrue(e.areEquivalent("foo", "foo"));
 		assertFalse(e.areEquivalent("foo", "bar"));
 	}

@@ -95,9 +95,9 @@ public class JouluWorkspace implements IwantWorkspace {
 	}
 
 	private Set<JavaSrcModule> allSrcModules() {
-		return new TreeSet<JavaSrcModule>(Arrays.asList(byteConsumer,
-				byteProducer, byteProducers, collections, equivalence,
-				optional, stronglyTyped, unsignedByte));
+		return new TreeSet<>(Arrays.asList(byteConsumer, byteProducer,
+				byteProducers, collections, equivalence, optional,
+				stronglyTyped, unsignedByte));
 	}
 
 	private Target coverageReport() {

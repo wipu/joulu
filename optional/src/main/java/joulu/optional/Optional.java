@@ -2,7 +2,7 @@ package joulu.optional;
 
 public final class Optional<T> {
 
-	private static final Optional<?> ABSENT = new Optional<Object>(null);
+	private static final Optional<?> ABSENT = new Optional<>(null);
 
 	private final T value;
 
@@ -14,7 +14,7 @@ public final class Optional<T> {
 		if (value == null) {
 			return absent();
 		}
-		return new Optional<T>(value);
+		return new Optional<>(value);
 	}
 
 	@SuppressWarnings("unchecked")
