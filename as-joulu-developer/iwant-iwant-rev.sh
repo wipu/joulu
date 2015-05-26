@@ -14,7 +14,7 @@ cd "$HERE"
 REV=$1
 URL=https://svn.code.sf.net/p/iwant/code/trunk
 
-svn export --force -r "$REV" "$URL/iwant-distillery/as-some-developer/with"
+svn export --force -r "$REV" "$URL/essential/iwant-entry/as-some-developer/with"
 
 CONF=i-have/conf
 mkdir -p "$CONF"
