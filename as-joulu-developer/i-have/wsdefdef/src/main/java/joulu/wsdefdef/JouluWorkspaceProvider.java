@@ -1,13 +1,13 @@
 package joulu.wsdefdef;
 
 import net.sf.iwant.api.javamodules.JavaSrcModule;
-import net.sf.iwant.api.wsdef.IwantWorkspaceProvider;
-import net.sf.iwant.api.wsdef.WorkspaceDefinitionContext;
+import net.sf.iwant.api.wsdef.WorkspaceModuleContext;
+import net.sf.iwant.api.wsdef.WorkspaceModuleProvider;
 
-public class JouluWorkspaceProvider implements IwantWorkspaceProvider {
+public class JouluWorkspaceProvider implements WorkspaceModuleProvider {
 
 	@Override
-	public JavaSrcModule workspaceModule(WorkspaceDefinitionContext ctx) {
+	public JavaSrcModule workspaceModule(WorkspaceModuleContext ctx) {
 		return JavaSrcModule.with().name("joulu-workspace")
 				.locationUnderWsRoot("as-joulu-developer/i-have/wsdef")
 				.mainJava("src/main/java").mainDeps(ctx.iwantApiModules())
@@ -16,8 +16,8 @@ public class JouluWorkspaceProvider implements IwantWorkspaceProvider {
 	}
 
 	@Override
-	public String workspaceClassname() {
-		return "joulu.wsdef.JouluWorkspace";
+	public String workspaceFactoryClassname() {
+		return "joulu.wsdef.JouluWorkspaceFactory";
 	}
 
 }

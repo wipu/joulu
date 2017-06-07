@@ -11,15 +11,16 @@ import net.sf.iwant.api.javamodules.JavaSrcModule.IwantSrcModuleSpex;
 import net.sf.iwant.api.model.SideEffect;
 import net.sf.iwant.api.model.StringFilter;
 import net.sf.iwant.api.model.Target;
-import net.sf.iwant.api.wsdef.IwantWorkspace;
 import net.sf.iwant.api.wsdef.SideEffectDefinitionContext;
+import net.sf.iwant.api.wsdef.TargetDefinitionContext;
+import net.sf.iwant.api.wsdef.Workspace;
 import net.sf.iwant.core.download.FromRepository;
 import net.sf.iwant.core.download.TestedIwantDependencies;
 import net.sf.iwant.eclipsesettings.EclipseSettings;
 import net.sf.iwant.plugin.jacoco.JacocoDistribution;
 import net.sf.iwant.plugin.jacoco.JacocoTargetsOfJavaModules;
 
-public class JouluWorkspace implements IwantWorkspace {
+public class JouluWorkspace implements Workspace {
 
 	private static StringFilter testNameFilter = new StringFilter() {
 		@Override
@@ -34,16 +35,18 @@ public class JouluWorkspace implements IwantWorkspace {
 		}
 	};
 
-	private final JavaBinModule asmAll = JavaBinModule.providing(
-			FromRepository.repo1MavenOrg().group("org/ow2/asm").name("asm-all")
-					.version("5.0.1")).end();
-	private final JavaBinModule hamcrestCore = JavaBinModule.providing(
-			FromRepository.repo1MavenOrg().group("org/hamcrest")
-					.name("hamcrest-core").version("1.3")).end();
+	private final JavaBinModule asmAll = JavaBinModule
+			.providing(FromRepository.repo1MavenOrg().group("org/ow2/asm")
+					.name("asm-all").version("5.0.1"))
+			.end();
+	private final JavaBinModule hamcrestCore = JavaBinModule
+			.providing(FromRepository.repo1MavenOrg().group("org/hamcrest")
+					.name("hamcrest-core").version("1.3"))
+			.end();
 	private final JavaBinModule junit = JavaBinModule
-			.providing(
-					FromRepository.repo1MavenOrg().group("junit").name("junit")
-							.version("4.11")).runtimeDeps(hamcrestCore).end();
+			.providing(FromRepository.repo1MavenOrg().group("junit")
+					.name("junit").version("4.11"))
+			.runtimeDeps(hamcrestCore).end();
 
 	private final JavaSrcModule stronglyTyped = srcModule("strongly-typed")
 			.noMainResources().noTestResources().mainDeps()
@@ -57,9 +60,8 @@ public class JouluWorkspace implements IwantWorkspace {
 			.noMainResources().noTestJava().noTestResources().end();
 
 	private final JavaSrcModule collections = srcModule("collections")
-			.noMainResources().noTestResources()
-			.mainDeps(equivalence, optional).testDeps(hamcrestCore, junit)
-			.end();
+			.noMainResources().noTestResources().mainDeps(equivalence, optional)
+			.testDeps(hamcrestCore, junit).end();
 
 	private final JavaSrcModule byteConsumer = srcModule("byte-consumer")
 			.noMainResources().noTestJava().noTestResources().end();
@@ -82,7 +84,7 @@ public class JouluWorkspace implements IwantWorkspace {
 	}
 
 	@Override
-	public List<? extends Target> targets() {
+	public List<? extends Target> targets(TargetDefinitionContext ctx) {
 		return Arrays.asList(coverageReport());
 	}
 
@@ -101,8 +103,7 @@ public class JouluWorkspace implements IwantWorkspace {
 	}
 
 	private Target coverageReport() {
-		return JacocoTargetsOfJavaModules
-				.with()
+		return JacocoTargetsOfJavaModules.with()
 				.jacocoWithDeps(jacoco(), asmAll.mainArtifact())
 				.antJars(TestedIwantDependencies.antJar(),
 						TestedIwantDependencies.antLauncherJar())

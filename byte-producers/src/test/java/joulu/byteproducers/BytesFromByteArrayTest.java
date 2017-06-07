@@ -2,9 +2,10 @@ package joulu.byteproducers;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import joulu.byteproducer.ByteProducer;
 
 import org.junit.Test;
+
+import joulu.byteproducer.ByteProducer;
 
 public class BytesFromByteArrayTest {
 

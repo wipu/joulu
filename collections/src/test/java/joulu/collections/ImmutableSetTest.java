@@ -8,11 +8,11 @@ import static org.junit.Assert.fail;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import org.junit.Test;
+
 import joulu.equivalence.Equivalence;
 import joulu.equivalence.Filter;
 import joulu.optional.Optional;
-
-import org.junit.Test;
 
 public class ImmutableSetTest {
 

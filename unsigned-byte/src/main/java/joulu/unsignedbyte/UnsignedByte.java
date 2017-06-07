@@ -8,8 +8,8 @@ public class UnsignedByte {
 
 	static {
 		for (int i = 0; i < 256; i++) {
-			values[i] = new UnsignedByte(i, "#$"
-					+ ByteArrayPrettyPrinter.spaceSeparatedHex((byte) i));
+			values[i] = new UnsignedByte(i,
+					"#$" + ByteArrayPrettyPrinter.spaceSeparatedHex((byte) i));
 		}
 	}
 
