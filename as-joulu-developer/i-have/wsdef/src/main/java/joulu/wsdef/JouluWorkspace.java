@@ -37,15 +37,15 @@ public class JouluWorkspace implements Workspace {
 
 	private final JavaBinModule asmAll = JavaBinModule
 			.providing(FromRepository.repo1MavenOrg().group("org/ow2/asm")
-					.name("asm-all").version("5.0.1"))
+					.name("asm-all").version("5.0.1").jar())
 			.end();
 	private final JavaBinModule hamcrestCore = JavaBinModule
 			.providing(FromRepository.repo1MavenOrg().group("org/hamcrest")
-					.name("hamcrest-core").version("1.3"))
+					.name("hamcrest-core").version("1.3").jar())
 			.end();
 	private final JavaBinModule junit = JavaBinModule
 			.providing(FromRepository.repo1MavenOrg().group("junit")
-					.name("junit").version("4.11"))
+					.name("junit").version("4.11").jar())
 			.runtimeDeps(hamcrestCore).end();
 
 	private final JavaSrcModule stronglyTyped = srcModule("strongly-typed")
