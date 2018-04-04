@@ -61,6 +61,7 @@ public class TypedIntegerTest {
 		assertEquals(Integer.valueOf(1), m.value());
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void objectsOfDifferentConcreteTypeAreNotEqual() {
 		MyInteger m1 = new MyInteger(1);

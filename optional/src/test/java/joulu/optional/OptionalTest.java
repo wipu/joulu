@@ -48,6 +48,7 @@ public class OptionalTest {
 		assertFalse(absent.isPresent());
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void presentOptionalEqualsAndHashcode() {
 		Optional<Integer> a1 = Optional.of(100);

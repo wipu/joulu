@@ -63,6 +63,7 @@ public class TypedStringTest {
 		assertEquals("m", m.value());
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void stringsOfDifferentConcreteTypeAreNotEqual() {
 		MyString m1 = new MyString("m");
