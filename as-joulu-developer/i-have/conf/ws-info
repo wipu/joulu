@@ -2,4 +2,4 @@
 WSNAME=joulu
 WSROOT=../../..
 WSDEFDEF_MODULE=../wsdefdef
-WSDEFDEF_CLASS=joulu.wsdefdef.JouluWorkspaceProvider
+WSDEFDEF_CLASS=org.fluentjava.joulu.wsdefdef.JouluWorkspaceProvider
