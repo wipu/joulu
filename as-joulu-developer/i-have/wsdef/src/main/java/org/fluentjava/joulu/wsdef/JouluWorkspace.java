@@ -39,6 +39,10 @@ public class JouluWorkspace implements Workspace {
 			.providing(FromRepository.repo1MavenOrg().group("org/ow2/asm")
 					.name("asm-all").version("5.0.1").jar())
 			.end();
+	private final JavaBinModule commonsCodec = JavaBinModule
+			.providing(FromRepository.repo1MavenOrg().group("commons-codec")
+					.name("commons-codec").version("1.9").jar())
+			.end();
 	private final JavaBinModule hamcrestCore = JavaBinModule
 			.providing(FromRepository.repo1MavenOrg().group("org/hamcrest")
 					.name("hamcrest-core").version("1.3").jar())
@@ -77,6 +81,10 @@ public class JouluWorkspace implements Workspace {
 			.noMainResources().noTestResources().mainDeps()
 			.testDeps(hamcrestCore, junit).end();
 
+	private final JavaSrcModule midievents = srcModule("midievents")
+			.noMainResources().mainDeps(commonsCodec, unsignedByte)
+			.testDeps(junit).end();
+
 	private static IwantSrcModuleSpex srcModule(String name) {
 		return JavaSrcModule.with().name("joulu-" + name)
 				.locationUnderWsRoot(name).mavenLayout()
@@ -99,7 +107,7 @@ public class JouluWorkspace implements Workspace {
 	private Set<JavaSrcModule> allSrcModules() {
 		return new TreeSet<>(Arrays.asList(byteConsumer, byteProducer,
 				byteProducers, collections, equivalence, optional,
-				stronglyTyped, unsignedByte));
+				stronglyTyped, unsignedByte, midievents));
 	}
 
 	private Target coverageReport() {
