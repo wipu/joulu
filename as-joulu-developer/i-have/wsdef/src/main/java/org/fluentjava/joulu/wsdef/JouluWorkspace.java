@@ -5,20 +5,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.sf.iwant.api.javamodules.JavaBinModule;
-import net.sf.iwant.api.javamodules.JavaSrcModule;
-import net.sf.iwant.api.javamodules.JavaSrcModule.IwantSrcModuleSpex;
-import net.sf.iwant.api.model.SideEffect;
-import net.sf.iwant.api.model.StringFilter;
-import net.sf.iwant.api.model.Target;
-import net.sf.iwant.api.wsdef.SideEffectDefinitionContext;
-import net.sf.iwant.api.wsdef.TargetDefinitionContext;
-import net.sf.iwant.api.wsdef.Workspace;
-import net.sf.iwant.core.download.FromRepository;
-import net.sf.iwant.core.download.TestedIwantDependencies;
-import net.sf.iwant.eclipsesettings.EclipseSettings;
-import net.sf.iwant.plugin.jacoco.JacocoDistribution;
-import net.sf.iwant.plugin.jacoco.JacocoTargetsOfJavaModules;
+import org.fluentjava.iwant.api.javamodules.JavaBinModule;
+import org.fluentjava.iwant.api.javamodules.JavaSrcModule;
+import org.fluentjava.iwant.api.javamodules.JavaSrcModule.IwantSrcModuleSpex;
+import org.fluentjava.iwant.api.model.SideEffect;
+import org.fluentjava.iwant.api.model.StringFilter;
+import org.fluentjava.iwant.api.model.Target;
+import org.fluentjava.iwant.api.wsdef.SideEffectDefinitionContext;
+import org.fluentjava.iwant.api.wsdef.TargetDefinitionContext;
+import org.fluentjava.iwant.api.wsdef.Workspace;
+import org.fluentjava.iwant.core.download.FromRepository;
+import org.fluentjava.iwant.core.download.TestedIwantDependencies;
+import org.fluentjava.iwant.eclipsesettings.EclipseSettings;
+import org.fluentjava.iwant.plugin.jacoco.JacocoDistribution;
+import org.fluentjava.iwant.plugin.jacoco.JacocoTargetsOfJavaModules;
 
 public class JouluWorkspace implements Workspace {
 
@@ -35,10 +35,6 @@ public class JouluWorkspace implements Workspace {
 		}
 	};
 
-	private final JavaBinModule asmAll = JavaBinModule
-			.providing(FromRepository.repo1MavenOrg().group("org/ow2/asm")
-					.name("asm-all").version("5.0.1").jar())
-			.end();
 	private final JavaBinModule commonsCodec = JavaBinModule
 			.providing(FromRepository.repo1MavenOrg().group("commons-codec")
 					.name("commons-codec").version("1.9").jar())
@@ -111,8 +107,7 @@ public class JouluWorkspace implements Workspace {
 	}
 
 	private Target coverageReport() {
-		return JacocoTargetsOfJavaModules.with()
-				.jacocoWithDeps(jacoco(), asmAll.mainArtifact())
+		return JacocoTargetsOfJavaModules.with().jacoco(jacoco())
 				.antJars(TestedIwantDependencies.antJar(),
 						TestedIwantDependencies.antLauncherJar())
 				.modules(allSrcModules()).end().jacocoReport("coverage-report");
