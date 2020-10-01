@@ -18,30 +18,30 @@ public class UnsignedByteTest {
 
 	@Test
 	public void fromSignedInt() {
-		assertEquals(UnsignedByte.$00, UnsignedByte.from(0));
-		assertEquals(UnsignedByte.$01, UnsignedByte.from(1));
-		assertEquals(UnsignedByte.$7F, UnsignedByte.from(127));
-		assertEquals(UnsignedByte.$80, UnsignedByte.from(128));
-		assertEquals(UnsignedByte.$80, UnsignedByte.from(-128));
-		assertEquals(UnsignedByte.$7F, UnsignedByte.from(-129));
-		assertEquals(UnsignedByte.$FF, UnsignedByte.from(-1));
+		assertEquals(UnsignedByte.x00, UnsignedByte.from(0));
+		assertEquals(UnsignedByte.x01, UnsignedByte.from(1));
+		assertEquals(UnsignedByte.x7F, UnsignedByte.from(127));
+		assertEquals(UnsignedByte.x80, UnsignedByte.from(128));
+		assertEquals(UnsignedByte.x80, UnsignedByte.from(-128));
+		assertEquals(UnsignedByte.x7F, UnsignedByte.from(-129));
+		assertEquals(UnsignedByte.xFF, UnsignedByte.from(-1));
 	}
 
 	@Test
 	public void fromLsbOf() {
-		assertEquals(UnsignedByte.$00, UnsignedByte.fromLsbOf(0));
-		assertEquals(UnsignedByte.$00, UnsignedByte.fromLsbOf(256));
+		assertEquals(UnsignedByte.x00, UnsignedByte.fromLsbOf(0));
+		assertEquals(UnsignedByte.x00, UnsignedByte.fromLsbOf(256));
 
-		assertEquals(UnsignedByte.$7F, UnsignedByte.fromLsbOf(127));
-		assertEquals(UnsignedByte.$7F, UnsignedByte.fromLsbOf(-129));
+		assertEquals(UnsignedByte.x7F, UnsignedByte.fromLsbOf(127));
+		assertEquals(UnsignedByte.x7F, UnsignedByte.fromLsbOf(-129));
 
-		assertEquals(UnsignedByte.$80, UnsignedByte.fromLsbOf(128));
-		assertEquals(UnsignedByte.$80, UnsignedByte.fromLsbOf(-128));
+		assertEquals(UnsignedByte.x80, UnsignedByte.fromLsbOf(128));
+		assertEquals(UnsignedByte.x80, UnsignedByte.fromLsbOf(-128));
 
-		assertEquals(UnsignedByte.$FF, UnsignedByte.fromLsbOf(255));
-		assertEquals(UnsignedByte.$FF, UnsignedByte.fromLsbOf(-1));
+		assertEquals(UnsignedByte.xFF, UnsignedByte.fromLsbOf(255));
+		assertEquals(UnsignedByte.xFF, UnsignedByte.fromLsbOf(-1));
 
-		assertEquals(UnsignedByte.$01, UnsignedByte.fromLsbOf(513));
+		assertEquals(UnsignedByte.x01, UnsignedByte.fromLsbOf(513));
 	}
 
 	@Test
@@ -58,8 +58,8 @@ public class UnsignedByteTest {
 
 	@Test
 	public void isBit0() {
-		assertTrue(UnsignedByte.$01.isBit0());
-		assertFalse(UnsignedByte.$FE.isBit0());
+		assertTrue(UnsignedByte.x01.isBit0());
+		assertFalse(UnsignedByte.xFE.isBit0());
 	}
 
 	@Test
@@ -70,8 +70,8 @@ public class UnsignedByteTest {
 
 	@Test
 	public void isBit1() {
-		assertTrue(UnsignedByte.$02.isBit1());
-		assertFalse(UnsignedByte.$FD.isBit1());
+		assertTrue(UnsignedByte.x02.isBit1());
+		assertFalse(UnsignedByte.xFD.isBit1());
 	}
 
 	@Test
@@ -82,56 +82,56 @@ public class UnsignedByteTest {
 
 	@Test
 	public void isBit2() {
-		assertTrue(UnsignedByte.$04.isBit2());
-		assertFalse(UnsignedByte.$FB.isBit2());
+		assertTrue(UnsignedByte.x04.isBit2());
+		assertFalse(UnsignedByte.xFB.isBit2());
 	}
 
 	@Test
 	public void isBit3() {
-		assertTrue(UnsignedByte.$08.isBit3());
-		assertFalse(UnsignedByte.$F7.isBit3());
+		assertTrue(UnsignedByte.x08.isBit3());
+		assertFalse(UnsignedByte.xF7.isBit3());
 	}
 
 	@Test
 	public void isBit4() {
-		assertTrue(UnsignedByte.$10.isBit4());
-		assertFalse(UnsignedByte.$EF.isBit4());
+		assertTrue(UnsignedByte.x10.isBit4());
+		assertFalse(UnsignedByte.xEF.isBit4());
 	}
 
 	@Test
 	public void isBit5() {
-		assertTrue(UnsignedByte.$20.isBit5());
-		assertFalse(UnsignedByte.$DF.isBit5());
+		assertTrue(UnsignedByte.x20.isBit5());
+		assertFalse(UnsignedByte.xDF.isBit5());
 	}
 
 	@Test
 	public void withBit6() {
-		assertEquals(0x40, UnsignedByte.$00.withBit6(true).uInt());
-		assertEquals(0xBF, UnsignedByte.$FF.withBit6(false).uInt());
+		assertEquals(0x40, UnsignedByte.x00.withBit6(true).uInt());
+		assertEquals(0xBF, UnsignedByte.xFF.withBit6(false).uInt());
 	}
 
 	@Test
 	public void isBit6() {
-		assertTrue(UnsignedByte.$40.isBit6());
-		assertFalse(UnsignedByte.$BF.isBit6());
+		assertTrue(UnsignedByte.x40.isBit6());
+		assertFalse(UnsignedByte.xBF.isBit6());
 	}
 
 	@Test
 	public void withBit7() {
-		assertEquals(0x80, UnsignedByte.$00.withBit7(true).uInt());
-		assertEquals(0x7F, UnsignedByte.$FF.withBit7(false).uInt());
+		assertEquals(0x80, UnsignedByte.x00.withBit7(true).uInt());
+		assertEquals(0x7F, UnsignedByte.xFF.withBit7(false).uInt());
 	}
 
 	@Test
 	public void isBit7() {
-		assertTrue(UnsignedByte.$80.isBit7());
-		assertFalse(UnsignedByte.$7F.isBit7());
+		assertTrue(UnsignedByte.x80.isBit7());
+		assertFalse(UnsignedByte.x7F.isBit7());
 	}
 
 	@Test
 	public void toStringIsHex() {
-		assertEquals("#$00", UnsignedByte.$00.toString());
-		assertEquals("#$8C", UnsignedByte.$8C.toString());
+		assertEquals("#$00", UnsignedByte.x00.toString());
+		assertEquals("#$8C", UnsignedByte.x8C.toString());
 	}
 
 	@Test
@@ -148,65 +148,65 @@ public class UnsignedByteTest {
 
 	@Test
 	public void hashCodeIsValue() {
-		assertEquals(10, UnsignedByte.$0A.hashCode());
-		assertEquals(240, UnsignedByte.$F0.hashCode());
+		assertEquals(10, UnsignedByte.x0A.hashCode());
+		assertEquals(240, UnsignedByte.xF0.hashCode());
 	}
 
 	@Test
 	public void and() {
-		assertEquals(UnsignedByte.$00, UnsignedByte.$F0.and(UnsignedByte.$0F));
-		assertEquals(UnsignedByte.$21, UnsignedByte.$F1.and(UnsignedByte.$2F));
+		assertEquals(UnsignedByte.x00, UnsignedByte.xF0.and(UnsignedByte.x0F));
+		assertEquals(UnsignedByte.x21, UnsignedByte.xF1.and(UnsignedByte.x2F));
 	}
 
 	@Test
 	public void or() {
-		assertEquals(UnsignedByte.$AB, UnsignedByte.$A0.or(UnsignedByte.$0B));
-		assertEquals(UnsignedByte.$3E, UnsignedByte.$1E.or(UnsignedByte.$20));
+		assertEquals(UnsignedByte.xAB, UnsignedByte.xA0.or(UnsignedByte.x0B));
+		assertEquals(UnsignedByte.x3E, UnsignedByte.x1E.or(UnsignedByte.x20));
 	}
 
 	@Test
 	public void eor() {
-		assertEquals(UnsignedByte.$AB, UnsignedByte.$A0.eor(UnsignedByte.$0B));
-		assertEquals(UnsignedByte.$EE, UnsignedByte.$F1.eor(UnsignedByte.$1F));
-		assertEquals(UnsignedByte.$12, UnsignedByte.$01.eor(UnsignedByte.$13));
+		assertEquals(UnsignedByte.xAB, UnsignedByte.xA0.eor(UnsignedByte.x0B));
+		assertEquals(UnsignedByte.xEE, UnsignedByte.xF1.eor(UnsignedByte.x1F));
+		assertEquals(UnsignedByte.x12, UnsignedByte.x01.eor(UnsignedByte.x13));
 	}
 
 	@Test
 	public void plus() {
-		assertEquals(UnsignedByte.$01, UnsignedByte.$00.plus(UnsignedByte.$01));
-		assertEquals(UnsignedByte.$FF, UnsignedByte.$00.plus(UnsignedByte.$FF));
-		assertEquals(UnsignedByte.$81, UnsignedByte.$7F.plus(UnsignedByte.$02));
-		assertEquals(UnsignedByte.$93, UnsignedByte.$12.plus(UnsignedByte.$81));
+		assertEquals(UnsignedByte.x01, UnsignedByte.x00.plus(UnsignedByte.x01));
+		assertEquals(UnsignedByte.xFF, UnsignedByte.x00.plus(UnsignedByte.xFF));
+		assertEquals(UnsignedByte.x81, UnsignedByte.x7F.plus(UnsignedByte.x02));
+		assertEquals(UnsignedByte.x93, UnsignedByte.x12.plus(UnsignedByte.x81));
 	}
 
 	@Test
 	public void plusSignedInt() {
-		assertEquals(UnsignedByte.$01, UnsignedByte.$00.plusSigned(1));
-		assertEquals(UnsignedByte.$FF, UnsignedByte.$00.plusSigned(-1));
-		assertEquals(UnsignedByte.$81, UnsignedByte.$7F.plusSigned(2));
-		assertEquals(UnsignedByte.$02, UnsignedByte.$01.plusSigned(513));
+		assertEquals(UnsignedByte.x01, UnsignedByte.x00.plusSigned(1));
+		assertEquals(UnsignedByte.xFF, UnsignedByte.x00.plusSigned(-1));
+		assertEquals(UnsignedByte.x81, UnsignedByte.x7F.plusSigned(2));
+		assertEquals(UnsignedByte.x02, UnsignedByte.x01.plusSigned(513));
 	}
 
 	@Test
 	public void not() {
-		assertEquals(UnsignedByte.$FF, UnsignedByte.$00.not());
-		assertEquals(UnsignedByte.$FE, UnsignedByte.$01.not());
-		assertEquals(UnsignedByte.$0C, UnsignedByte.$F3.not());
+		assertEquals(UnsignedByte.xFF, UnsignedByte.x00.not());
+		assertEquals(UnsignedByte.xFE, UnsignedByte.x01.not());
+		assertEquals(UnsignedByte.x0C, UnsignedByte.xF3.not());
 	}
 
 	@Test
 	public void isZero() {
-		assertTrue(UnsignedByte.$00.isZero());
-		assertFalse(UnsignedByte.$01.isZero());
+		assertTrue(UnsignedByte.x00.isZero());
+		assertFalse(UnsignedByte.x01.isZero());
 	}
 
 	@Test
 	public void isNegative() {
-		assertFalse(UnsignedByte.$00.isNegative());
-		assertFalse(UnsignedByte.$01.isNegative());
-		assertFalse(UnsignedByte.$7F.isNegative());
-		assertTrue(UnsignedByte.$80.isNegative());
-		assertTrue(UnsignedByte.$FF.isNegative());
+		assertFalse(UnsignedByte.x00.isNegative());
+		assertFalse(UnsignedByte.x01.isNegative());
+		assertFalse(UnsignedByte.x7F.isNegative());
+		assertTrue(UnsignedByte.x80.isNegative());
+		assertTrue(UnsignedByte.xFF.isNegative());
 	}
 
 	/**
@@ -218,7 +218,7 @@ public class UnsignedByteTest {
 		StringBuilder b = new StringBuilder();
 		for (int i = 0; i < 256; i++) {
 			String hex = ByteArrayPrettyPrinter.spaceSeparatedHex((byte) i);
-			b.append("	public static final UnsignedByte $" + hex
+			b.append("	public static final UnsignedByte x" + hex
 					+ " = UnsignedByte.from(" + i + ");\n");
 		}
 		assertEquals("copy this to UnsignedByte.java", b.toString());
