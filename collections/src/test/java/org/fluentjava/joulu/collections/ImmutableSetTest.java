@@ -37,7 +37,7 @@ public class ImmutableSetTest {
 	@Test
 	public void emptySetWithEquivalence() {
 		Set<String> empty = ImmutableSet.empty();
-		Equivalence<String> eq = new Equivalence<String>() {
+		Equivalence<String> eq = new Equivalence<>() {
 			@Override
 			public boolean areEquivalent(String value1, String value2) {
 				return true;
@@ -50,7 +50,7 @@ public class ImmutableSetTest {
 	@Test
 	public void emptySetWithFilter() {
 		Set<String> empty = ImmutableSet.empty();
-		Filter<String> filter = new Filter<String>() {
+		Filter<String> filter = new Filter<>() {
 			@Override
 			public boolean matches(String t) {
 				return true;
@@ -83,7 +83,7 @@ public class ImmutableSetTest {
 
 	@Test
 	public void containsWithConstructionTimeEquivalence() {
-		Equivalence<String> eq = new Equivalence<String>() {
+		Equivalence<String> eq = new Equivalence<>() {
 			@Override
 			public boolean areEquivalent(String value1, String value2) {
 				return value1.trim().equals(value2.trim());
@@ -100,14 +100,14 @@ public class ImmutableSetTest {
 
 	@Test
 	public void containsWithOverriddenEquivalence() {
-		Equivalence<String> eq = new Equivalence<String>() {
+		Equivalence<String> eq = new Equivalence<>() {
 			@Override
 			public boolean areEquivalent(String value1, String value2) {
 				return value1.equals(value2);
 			}
 		};
 		Set<String> set = ImmutableSet.of(eq, "Foo", "Bar");
-		Equivalence<String> laxEq = new Equivalence<String>() {
+		Equivalence<String> laxEq = new Equivalence<>() {
 
 			@Override
 			public boolean areEquivalent(String value1, String value2) {
@@ -131,7 +131,7 @@ public class ImmutableSetTest {
 		Set<String> set = ImmutableSet.of("1", "2");
 		final String value = "2";
 
-		Filter<String> filter = new Filter<String>() {
+		Filter<String> filter = new Filter<>() {
 
 			@Override
 			public boolean matches(String other) {
@@ -146,7 +146,7 @@ public class ImmutableSetTest {
 	public void withNotMatchingFilter() {
 		Set<String> set = ImmutableSet.of("1", "2");
 
-		Filter<String> filter = new Filter<String>() {
+		Filter<String> filter = new Filter<>() {
 
 			@Override
 			public boolean matches(String other) {
@@ -169,7 +169,7 @@ public class ImmutableSetTest {
 		Set<Integer> set = ImmutableSet.of(1, 3, 5);
 		final int limit = 2;
 
-		Filter<Integer> greaterThan3 = new Filter<Integer>() {
+		Filter<Integer> greaterThan3 = new Filter<>() {
 
 			@Override
 			public boolean matches(Integer value) {
@@ -180,7 +180,7 @@ public class ImmutableSetTest {
 		assertEquals(Integer.valueOf(3), set.findOne(greaterThan3).value());
 
 		final int anotherLimit = 5;
-		Filter<Integer> greaterThan5 = new Filter<Integer>() {
+		Filter<Integer> greaterThan5 = new Filter<>() {
 
 			@Override
 			public boolean matches(Integer value) {
