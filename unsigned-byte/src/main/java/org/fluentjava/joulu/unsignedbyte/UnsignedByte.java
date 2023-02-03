@@ -279,6 +279,10 @@ public class UnsignedByte {
 		return values[unsigned(value)];
 	}
 
+	public static UnsignedByte from(long value) {
+		return from((int) value);
+	}
+
 	public static UnsignedByte fromLsbOf(int value) {
 		return values[unsigned(value)];
 	}
@@ -288,6 +292,10 @@ public class UnsignedByte {
 	}
 
 	public int uInt() {
+		return unsigned(value);
+	}
+
+	public long uLong() {
 		return unsigned(value);
 	}
 

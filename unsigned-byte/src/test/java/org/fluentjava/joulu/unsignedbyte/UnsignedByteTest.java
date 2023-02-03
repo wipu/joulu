@@ -25,6 +25,25 @@ public class UnsignedByteTest {
 		assertEquals(UnsignedByte.x80, UnsignedByte.from(-128));
 		assertEquals(UnsignedByte.x7F, UnsignedByte.from(-129));
 		assertEquals(UnsignedByte.xFF, UnsignedByte.from(-1));
+
+		// overflow:
+		assertEquals(UnsignedByte.x00, UnsignedByte.from(256));
+		assertEquals(UnsignedByte.x01, UnsignedByte.from(257));
+	}
+
+	@Test
+	public void fromSignedLong() {
+		assertEquals(UnsignedByte.x00, UnsignedByte.from(0L));
+		assertEquals(UnsignedByte.x01, UnsignedByte.from(1L));
+		assertEquals(UnsignedByte.x7F, UnsignedByte.from(127L));
+		assertEquals(UnsignedByte.x80, UnsignedByte.from(128L));
+		assertEquals(UnsignedByte.x80, UnsignedByte.from(-128L));
+		assertEquals(UnsignedByte.x7F, UnsignedByte.from(-129L));
+		assertEquals(UnsignedByte.xFF, UnsignedByte.from(-1L));
+
+		// overflow:
+		assertEquals(UnsignedByte.x00, UnsignedByte.from(256L));
+		assertEquals(UnsignedByte.x01, UnsignedByte.from(257L));
 	}
 
 	@Test
@@ -46,8 +65,14 @@ public class UnsignedByteTest {
 
 	@Test
 	public void toUnsignedInt() {
-		assertEquals(0, UnsignedByte.from((byte) 0).uInt());
-		assertEquals(255, UnsignedByte.from((byte) 0xFF).uInt());
+		assertEquals(0, UnsignedByte.x00.uInt());
+		assertEquals(255, UnsignedByte.xFF.uInt());
+	}
+
+	@Test
+	public void toUnsignedLong() {
+		assertEquals(0L, UnsignedByte.x00.uLong());
+		assertEquals(255L, UnsignedByte.xFF.uLong());
 	}
 
 	@Test
