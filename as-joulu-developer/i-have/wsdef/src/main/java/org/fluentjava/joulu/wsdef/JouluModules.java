@@ -31,7 +31,7 @@ public class JouluModules extends JavaModules {
 
 	private IwantSrcModuleSpex jouluModule(String name) {
 		return srcModule("joulu-" + name).locationUnderWsRoot(name)
-				.mavenLayout().testDeps(junit5runnerMods);
+				.testDeps(junit5runnerMods);
 	}
 
 	private JavaSrcModule stronglyTyped() {
