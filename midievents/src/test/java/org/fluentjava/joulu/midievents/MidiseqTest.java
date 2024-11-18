@@ -1,6 +1,6 @@
 package org.fluentjava.joulu.midievents;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,7 +11,7 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;
 
 import org.fluentjava.joulu.midievents.Midievents.MidieventsPlease;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MidiseqTest {
 

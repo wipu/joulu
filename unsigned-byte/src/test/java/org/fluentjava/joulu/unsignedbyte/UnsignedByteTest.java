@@ -1,11 +1,11 @@
 package org.fluentjava.joulu.unsignedbyte;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class UnsignedByteTest {
 
@@ -238,7 +238,7 @@ public class UnsignedByteTest {
 	 * Unignore to get an error message to copy new code from, if needed.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void constantDef() {
 		StringBuilder b = new StringBuilder();
 		for (int i = 0; i < 256; i++) {

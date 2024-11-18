@@ -1,9 +1,9 @@
 package org.fluentjava.joulu.collections;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 import org.fluentjava.joulu.equivalence.Equivalence;
 import org.fluentjava.joulu.equivalence.Filter;
 import org.fluentjava.joulu.optional.Optional;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ImmutableSetTest {
 

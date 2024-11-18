@@ -1,7 +1,7 @@
 package org.fluentjava.joulu.stronglytyped;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TypedFloatTest {
 	class MyFloat extends TypedFloat {
