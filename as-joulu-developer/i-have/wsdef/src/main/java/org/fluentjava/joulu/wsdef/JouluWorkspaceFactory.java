@@ -8,7 +8,7 @@ public class JouluWorkspaceFactory implements WorkspaceFactory {
 
 	@Override
 	public Workspace workspace(WorkspaceContext ctx) {
-		return new JouluWorkspace();
+		return new JouluWorkspace(ctx);
 	}
 
 }

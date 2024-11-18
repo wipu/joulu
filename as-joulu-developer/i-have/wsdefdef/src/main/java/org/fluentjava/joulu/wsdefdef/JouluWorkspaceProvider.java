@@ -12,6 +12,7 @@ public class JouluWorkspaceProvider implements WorkspaceModuleProvider {
 				.locationUnderWsRoot("as-joulu-developer/i-have/wsdef")
 				.mainJava("src/main/java").mainDeps(ctx.iwantApiModules())
 				.mainDeps(ctx.iwantPlugin().jacoco().withDependencies())
+				.mainDeps(ctx.iwantPlugin().junit5runner().withDependencies())
 				.mainDeps(ctx.wsdefdefModule()).end();
 	}
 
